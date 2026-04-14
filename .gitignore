@@ -255,6 +255,8 @@ wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
 sitemap.xml
 *.sql
+!supabase/migrations/*.sql
+!supabase/seed.sql
 *.tar.gz
 *.zip
 *.log
@@ -275,6 +277,8 @@ sitemap.xml
 # Logs and databases
 *.log
 *.sql
+!supabase/migrations/*.sql
+!supabase/seed.sql
 *.sqlite
 *.db
 
