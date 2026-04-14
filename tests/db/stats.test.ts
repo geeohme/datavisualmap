@@ -12,11 +12,12 @@ describe('lib/db/stats', () => {
     const client = anonClient()
     await signInTestUser(client)
     const p = await createProject(client, { name: 'P' })
-    const c = await createContainer(client, { project_id: p.id, name: 'C', container_type: 'source' })
+    const c = await createContainer(client, { project_id: p.id, name: 'C', container_type: 'source', position_x: 0, position_y: 0 })
+    const elBase = { tags: [] as string[], fidelity: 'full' as const, status: 'unmapped' as const }
     const [a, , ] = await createElements(client, [
-      { container_id: c.id, display_label: 'a' },
-      { container_id: c.id, display_label: 'b' },
-      { container_id: c.id, display_label: 'c' },
+      { container_id: c.id, display_label: 'a', ...elBase, sort_order: 0 },
+      { container_id: c.id, display_label: 'b', ...elBase, sort_order: 1 },
+      { container_id: c.id, display_label: 'c', ...elBase, sort_order: 2 },
     ])
     await updateElement(client, a.id, { status: 'confirmed' })
     const stats = await getProjectStats(client, p.id)

@@ -14,13 +14,14 @@ describe('lib/db/elements', () => {
     await signInTestUser(client)
     const project = await createProject(client, { name: 'P' })
     const container = await createContainer(client, {
-      project_id: project.id, name: 'Customers', container_type: 'source',
+      project_id: project.id, name: 'Customers', container_type: 'source', position_x: 0, position_y: 0,
     })
-    const one = await createElement(client, { container_id: container.id, display_label: 'id' })
+    const elBase = { tags: [] as string[], fidelity: 'full' as const, status: 'unmapped' as const, sort_order: 0 }
+    const one = await createElement(client, { container_id: container.id, display_label: 'id', ...elBase })
     expect(one.display_label).toBe('id')
     const many = await createElements(client, [
-      { container_id: container.id, display_label: 'name' },
-      { container_id: container.id, display_label: 'email' },
+      { container_id: container.id, display_label: 'name', ...elBase, sort_order: 1 },
+      { container_id: container.id, display_label: 'email', ...elBase, sort_order: 2 },
     ])
     expect(many).toHaveLength(2)
     const list = await listElementsByContainer(client, container.id)

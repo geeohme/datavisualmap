@@ -14,11 +14,12 @@ describe('lib/db/mappings', () => {
     const client = anonClient()
     const userId = await signInTestUser(client)
     const project = await createProject(client, { name: 'P' })
-    const src = await createContainer(client, { project_id: project.id, name: 'Src', container_type: 'source' })
-    const tgt = await createContainer(client, { project_id: project.id, name: 'Tgt', container_type: 'target' })
-    const s1 = await createElement(client, { container_id: src.id, display_label: 'first_name' })
-    const s2 = await createElement(client, { container_id: src.id, display_label: 'last_name' })
-    const t1 = await createElement(client, { container_id: tgt.id, display_label: 'full_name' })
+    const src = await createContainer(client, { project_id: project.id, name: 'Src', container_type: 'source', position_x: 0, position_y: 0 })
+    const tgt = await createContainer(client, { project_id: project.id, name: 'Tgt', container_type: 'target', position_x: 0, position_y: 0 })
+    const elBase = { tags: [] as string[], fidelity: 'full' as const, status: 'unmapped' as const, sort_order: 0 }
+    const s1 = await createElement(client, { container_id: src.id, display_label: 'first_name', ...elBase })
+    const s2 = await createElement(client, { container_id: src.id, display_label: 'last_name', ...elBase, sort_order: 1 })
+    const t1 = await createElement(client, { container_id: tgt.id, display_label: 'full_name', ...elBase })
 
     const m = await createMapping(client, {
       project_id: project.id,

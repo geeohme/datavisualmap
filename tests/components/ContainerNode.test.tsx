@@ -6,6 +6,7 @@ import { ContainerNode } from '@/components/canvas/ContainerNode'
 function renderNode(data: any) {
   return render(
     <ReactFlowProvider>
+      {/* @ts-expect-error partial NodeProps for test */}
       <ContainerNode id="n1" data={data} selected={false} type="container" />
     </ReactFlowProvider>,
   )

@@ -13,7 +13,7 @@ describe('lib/db/containers', () => {
     await signInTestUser(client)
     const project = await createProject(client, { name: 'P' })
     const c = await createContainer(client, {
-      project_id: project.id, name: 'Customers', container_type: 'source',
+      project_id: project.id, name: 'Customers', container_type: 'source', position_x: 0, position_y: 0,
     })
     expect(c.name).toBe('Customers')
     const list = await listContainers(client, project.id)
