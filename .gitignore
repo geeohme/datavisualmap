@@ -320,4 +320,5 @@ secrets.json
 /supabase/.temp
 /test-results
 /playwright-report
+tests/e2e/.auth-state.json
 
