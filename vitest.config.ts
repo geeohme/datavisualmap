@@ -13,6 +13,7 @@ export default defineConfig({
     setupFiles: ['./tests/helpers/vitest-setup.ts'],
     include: ['tests/**/*.test.{ts,tsx}'],
     exclude: ['tests/e2e/**', 'node_modules/**'],
+    fileParallelism: false,
   },
   resolve: {
     alias: { '@': path.resolve(__dirname, '.') },
