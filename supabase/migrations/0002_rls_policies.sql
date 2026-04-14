@@ -18,7 +18,7 @@ as $$
 $$;
 
 create policy "projects_select_members" on projects
-  for select using (is_project_member(id));
+  for select using (is_project_member(id) or created_by = auth.uid());
 
 create policy "projects_insert_authenticated" on projects
   for insert with check (auth.uid() is not null and created_by = auth.uid());
