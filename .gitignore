@@ -322,3 +322,4 @@ secrets.json
 /playwright-report
 tests/e2e/.auth-state.json
 
+*.tsbuildinfo
