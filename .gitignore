@@ -314,3 +314,8 @@ secrets.json
 *.tfstate.backup
 .env.vault
 
+# Project-specific
+/supabase/.temp
+/test-results
+/playwright-report
+
