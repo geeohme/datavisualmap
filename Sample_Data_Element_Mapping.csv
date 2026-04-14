@@ -1,0 +1,22 @@
+﻿Data Element Mapping — 1-Parties & Accounts,,,,,,,,,,,
+"Instructions: Complete 'Business Decision Owner', 'Inclusion Decision', Source / Target owners, and mapping notes for each field.",,,,,,,,,,,
+Data Element / Field,Description / Notes,"Business Decision Owner
+(Do We Need It?)","Inclusion Decision
+(Yes / No / TBD)",Source Application / Database,Source IT Owner,Source Dev Owner,Target Application,Target IT Owner,Target Dev Owner,Transformation / Mapping Notes,Status
+party_id,Unique party identifier (PK),,TBD,,,,,,,,Open
+party_type,Individual / Corporate / Dealer,,TBD,,,,,,,,Open
+party_name,Full legal name,,TBD,,,,,,,,Open
+national_id,Government-issued ID / TIN,,TBD,,,,,,,,Open
+date_of_birth,DOB for individual customers,,TBD,,,,,,,,Open
+contact_email,Primary email address,,TBD,,,,,,,,Open
+contact_phone,Primary phone number,,TBD,,,,,,,,Open
+account_id,Unique billing account identifier (PK),,TBD,,,,,,,,Open
+account_type,Consumer / Small-Biz / Corporate,,TBD,,,,,,,,Open
+credit_class,Credit risk tier,,TBD,,,,,,,,Open
+account_status,Active / Suspended / Closed,,TBD,,,,,,,,Open
+bill_cycle_code,Billing cycle assignment,,TBD,,,,,,,,Open
+currency_code,ISO 4217 billing currency,,TBD,,,,,,,,Open
+parent_account_id,Parent account for group hierarchies,,TBD,,,,,,,,Open
+relationship_type,Family share / Corporate parent / etc.,,TBD,,,,,,,,Open
+account_address_role,Bill-to / Contact / Service address role,,TBD,,,,,,,,Open
+customer_id,Customer ID,,,,,,,,,,
