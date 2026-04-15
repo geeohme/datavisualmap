@@ -14,7 +14,12 @@ import { useInvalidateProject, type ProjectData } from '@/lib/hooks/useProjectDa
 import type { Project } from '@/lib/domain/types'
 import type { Selection } from '@/components/project/Workspace'
 
-function projectToGraph(data: ProjectData): { nodes: Node[]; edges: Edge[] } {
+function projectToGraph(
+  data: ProjectData,
+  projectId: string,
+  selectedElementId: string | null,
+  onSelectElement: (id: string) => void,
+): { nodes: Node[]; edges: Edge[] } {
   const nodes: Node[] = data.containers.map(c => ({
     id: c.id,
     type: 'container',
@@ -24,6 +29,9 @@ function projectToGraph(data: ProjectData): { nodes: Node[]; edges: Edge[] } {
       fields: data.elements
         .filter(e => e.container_id === c.id)
         .map(e => ({ id: e.id, display_label: e.display_label, status: e.status })),
+      projectId,
+      selectedElementId,
+      onSelectElement,
     },
   }))
   const edges: Edge[] = data.mappings.flatMap(m =>
@@ -60,11 +68,21 @@ export function Canvas({
   onSelect: (s: Selection) => void
 }) {
   const invalidate = useInvalidateProject()
-  const initial = useMemo(() => projectToGraph(data), [data])
+  const selectedElementId = selection.kind === 'element' ? selection.id : null
+  const handleSelectElement = useCallback(
+    (id: string) => onSelect({ kind: 'element', id }),
+    [onSelect],
+  )
+  const initial = useMemo(
+    () => projectToGraph(data, project.id, selectedElementId, handleSelectElement),
+    [data, project.id, selectedElementId, handleSelectElement],
+  )
   const [nodes, setNodes] = useState<Node[]>(initial.nodes)
   const edges = initial.edges
 
-  useEffect(() => { setNodes(projectToGraph(data).nodes) }, [data])
+  useEffect(() => {
+    setNodes(projectToGraph(data, project.id, selectedElementId, handleSelectElement).nodes)
+  }, [data, project.id, selectedElementId, handleSelectElement])
 
   const onNodesChange = useCallback((changes: NodeChange[]) => {
     setNodes(ns => applyNodeChanges(changes, ns))
